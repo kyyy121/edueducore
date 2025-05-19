@@ -1,0 +1,53 @@
+name: edueducore
+description: "A new Flutter project."
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.6.2
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.8
+  get: ^4.7.2
+  intl: ^0.18.0
+  table_calendar: ^3.0.9
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/logo/logo-splash.png
+    - assets/logo/icons/google.png
+    - assets/logo/icons/instagram.png
+    - assets/logo/icons/twitter.png
+    - assets/logo/icons/educorelogo.png
+    - assets/logo/images/profil.png
+    - assets/logo/icons/absensi.png
+    - assets/logo/icons/kelas.png
+    - assets/logo/icons/event.png
+    - assets/logo/icons/kalender.png
+    - assets/logo/icons/ekstrakulikuler.png
+    - assets/logo/images/barru.jpg
+    - assets/logo/images/iky.jpg
+    - assets/logo/images/dyandra.jpg
+    - assets/logo/images/laura.jpg
+    - assets/logo/icons/medal.png
+    - assets/logo/icons/basket.png
+    - assets/logo/icons/football.png
+    - assets/logo/icons/chess.png
+    - assets/logo/icons/music.png
+    - assets/logo/icons/flag.png
+    - assets/logo/icons/scout.png
+    - assets/logo/icons/dance.png
+    - assets/logo/icons/banjari.png
+    - assets/logo/icons/silat.png
+    - assets/logo/icons/medal.png
+    - assets/logo/icons/gamelan.png
+    - assets/logo/icons/empty_calendar.png
+

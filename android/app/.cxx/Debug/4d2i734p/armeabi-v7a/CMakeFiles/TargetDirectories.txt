@@ -1,0 +1,2 @@
+C:/Users/MyBook Hype AMD/edueducore/android/app/.cxx/Debug/4d2i734p/armeabi-v7a/CMakeFiles/edit_cache.dir
+C:/Users/MyBook Hype AMD/edueducore/android/app/.cxx/Debug/4d2i734p/armeabi-v7a/CMakeFiles/rebuild_cache.dir
