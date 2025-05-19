@@ -9,5 +9,6 @@ abstract class Routes {
   static const EXTRACURRICULAR = '/extracurricular';
   static const STARTING = '/starting';
   static const CALENDAR = '/calendar';  // Added Calendar route
+  static const CLASS = '/class';
 
 }

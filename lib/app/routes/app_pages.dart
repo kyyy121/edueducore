@@ -14,6 +14,8 @@ import '../modules/starting/bindings/starting_binding.dart';
 import '../modules/starting/views/starting_view.dart';
 import '../modules/calendar/bindings/calendar_binding.dart';
 import '../modules/calendar/views/calendar_view.dart';
+import '../modules/class/bindings/class_binding.dart';
+import '../modules/class/views/class_view.dart';
 import '../widgets/splash.dart';
 
 part 'app_routes.dart';
@@ -69,5 +71,12 @@ class AppPages {
       transition: Transition.rightToLeft,
       transitionDuration: const Duration(milliseconds: 250),
     ),
+  
+    // In your routes list
+      GetPage(
+        name: '/class',
+        page: () => const ClassView(),
+        binding: ClassBinding(),
+      ),
   ];
 }
