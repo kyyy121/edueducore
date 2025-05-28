@@ -13,21 +13,31 @@ dependencies:
   get: ^4.7.2
   intl: ^0.18.0
   table_calendar: ^3.0.9
+  rename: ^3.1.0
+  fl_chart: ^0.68.0  
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^5.0.0
+  flutter_launcher_icons: ^0.13.1
+
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "assets/logo/logo-splash2.png"
 
 flutter:
   uses-material-design: true
   assets:
     - assets/logo/logo-splash.png
+    - assets/logo/logo-splash2.png
     - assets/logo/icons/google.png
     - assets/logo/icons/instagram.png
     - assets/logo/icons/twitter.png
     - assets/logo/icons/educorelogo.png
     - assets/logo/images/profil.png
+    - assets/logo/images/profil2.png
     - assets/logo/icons/absensi.png
     - assets/logo/icons/kelas.png
     - assets/logo/icons/event.png
@@ -47,7 +57,20 @@ flutter:
     - assets/logo/icons/dance.png
     - assets/logo/icons/banjari.png
     - assets/logo/icons/silat.png
-    - assets/logo/icons/medal.png
+    - assets/logo/icons/medal2.png
     - assets/logo/icons/gamelan.png
     - assets/logo/icons/empty_calendar.png
-
+    - assets/logo/icons/matematika.png
+    - assets/logo/icons/ipa.png
+    - assets/logo/icons/ips.png
+    - assets/logo/icons/bindo.png
+    - assets/logo/icons/bing.png
+    - assets/logo/icons/informatika.png
+    - assets/logo/icons/pjok.png
+    - assets/logo/icons/ppkn.png
+    - assets/logo/icons/seni.png
+    - assets/logo/images/classmeet.png
+    - assets/logo/images/hutspenma.png
+    - assets/logo/images/sertijab.png
+    - assets/logo/images/p5.png
+    - assets/logo/images/silahturahmi.png

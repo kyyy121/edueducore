@@ -130,11 +130,16 @@ class ExtracurricularController extends GetxController {
   void showDetailDialog(BuildContext context, Map<String, dynamic> extracurricular) {
     showDialog(
       context: context,
+      barrierDismissible: true,
       builder: (BuildContext context) {
         return Dialog(
           backgroundColor: Colors.transparent,
-          insetPadding: const EdgeInsets.symmetric(horizontal: 20),
+          insetPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 40),
           child: Container(
+            width: MediaQuery.of(context).size.width,
+            constraints: BoxConstraints(
+              maxHeight: MediaQuery.of(context).size.height * 0.85,
+            ),
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(25),
@@ -146,23 +151,23 @@ class ExtracurricularController extends GetxController {
                 ),
               ],
             ),
-            constraints: const BoxConstraints(maxHeight: 600),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
                 // Header with gradient
                 Container(
+                  width: double.infinity,
                   padding: const EdgeInsets.fromLTRB(20, 25, 20, 25),
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     gradient: LinearGradient(
                       colors: [
-                        const Color(0xFFBE5B50),
-                        const Color(0xFFD77A70),
+                        Color(0xFFBE5B50),
+                        Color(0xFFD77A70),
                       ],
                       begin: Alignment.topLeft,
                       end: Alignment.bottomRight,
                     ),
-                    borderRadius: const BorderRadius.only(
+                    borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(25),
                       topRight: Radius.circular(25),
                     ),
@@ -183,7 +188,6 @@ class ExtracurricularController extends GetxController {
                             ),
                           ],
                         ),
-                        // Removed color property to show original icon colors
                         child: Image.asset(
                           extracurricular['iconPath'],
                           width: 40,
@@ -222,217 +226,220 @@ class ExtracurricularController extends GetxController {
                 ),
                 
                 // Content in scrollable area
-                Flexible(
+                Expanded(
                   child: SingleChildScrollView(
                     physics: const BouncingScrollPhysics(),
-                    child: Padding(
-                      padding: const EdgeInsets.all(25),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          // Description section with card
-                          Container(
-                            padding: const EdgeInsets.all(20),
-                            decoration: BoxDecoration(
-                              color: const Color(0xFFF8F9FA),
-                              borderRadius: BorderRadius.circular(15),
-                              border: Border.all(
-                                color: const Color(0xFFEEEEEE),
-                                width: 1,
-                              ),
+                    padding: const EdgeInsets.all(25),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        // Description section with card
+                        Container(
+                          width: double.infinity,
+                          padding: const EdgeInsets.all(20),
+                          decoration: BoxDecoration(
+                            color: const Color(0xFFF8F9FA),
+                            borderRadius: BorderRadius.circular(15),
+                            border: Border.all(
+                              color: const Color(0xFFEEEEEE),
+                              width: 1,
                             ),
-                            child: Column(
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Row(
+                                children: [
+                                  Icon(
+                                    Icons.info_outline,
+                                    color: Color(0xFF053158),
+                                    size: 18,
+                                  ),
+                                  SizedBox(width: 8),
+                                  Text(
+                                    "Tentang Ekstrakulikuler",
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                      color: Color(0xFF053158),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(height: 12),
+                              Text(
+                                extracurricular['description'],
+                                style: const TextStyle(
+                                  fontSize: 14,
+                                  height: 1.5,
+                                  color: Colors.black87,
+                                ),
+                                textAlign: TextAlign.justify,
+                              ),
+                            ],
+                          ),
+                        ),
+                        
+                        const SizedBox(height: 25),
+                        
+                        // Info items with modern design
+                        const Text(
+                          "Informasi Kegiatan",
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            color: Color(0xFF053158),
+                          ),
+                        ),
+                        const SizedBox(height: 15),
+                        
+                        // Info items
+                        _buildInfoItem(
+                          icon: Icons.person,
+                          iconColor: const Color(0xFF5B67CA),
+                          title: "Pembina",
+                          value: extracurricular['coach'],
+                        ),
+                        const SizedBox(height: 15),
+                        _buildInfoItem(
+                          icon: Icons.access_time,
+                          iconColor: const Color(0xFFFF8C42),
+                          title: "Jadwal",
+                          value: extracurricular['schedule'],
+                        ),
+                        const SizedBox(height: 15),
+                        _buildInfoItem(
+                          icon: Icons.location_on,
+                          iconColor: const Color(0xFFE63E6D),
+                          title: "Lokasi",
+                          value: extracurricular['location'],
+                        ),
+                        
+                        const SizedBox(height: 25),
+                        
+                        // Achievements with badges
+                        const Text(
+                          "Prestasi",
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            color: Color(0xFF053158),
+                          ),
+                        ),
+                        const SizedBox(height: 15),
+                        
+                        // Achievement list
+                        ...extracurricular['achievements'].map<Widget>((achievement) => 
+                          Container(
+                            width: double.infinity,
+                            margin: const EdgeInsets.only(bottom: 12),
+                            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+                            decoration: BoxDecoration(
+                              gradient: LinearGradient(
+                                colors: [
+                                  const Color(0xFFF5E5C4),
+                                  const Color(0xFFF5E5C4).withOpacity(0.7),
+                                ],
+                                begin: Alignment.topLeft,
+                                end: Alignment.bottomRight,
+                              ),
+                              borderRadius: BorderRadius.circular(12),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: const Color(0xFFF5E5C4).withOpacity(0.5),
+                                  blurRadius: 5,
+                                  offset: const Offset(0, 3),
+                                ),
+                              ],
+                            ),
+                            child: Row(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                const Row(
-                                  children: [
-                                    Icon(
-                                      Icons.info_outline,
-                                      color: Color(0xFF053158),
-                                      size: 18,
-                                    ),
-                                    SizedBox(width: 8),
-                                    Text(
-                                      "Tentang Ekstrakulikuler",
-                                      style: TextStyle(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.bold,
-                                        color: Color(0xFF053158),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                const SizedBox(height: 12),
-                                Text(
-                                  extracurricular['description'],
-                                  style: const TextStyle(
-                                    fontSize: 14,
-                                    height: 1.5,
-                                    color: Colors.black87,
+                                Container(
+                                  padding: const EdgeInsets.all(8),
+                                  decoration: const BoxDecoration(
+                                    color: Color(0xFFBE5B50),
+                                    shape: BoxShape.circle,
                                   ),
-                                  textAlign: TextAlign.justify,
+                                  child: const Icon(
+                                    Icons.emoji_events,
+                                    color: Colors.white,
+                                    size: 16,
+                                  ),
+                                ),
+                                const SizedBox(width: 12),
+                                Expanded(
+                                  child: Text(
+                                    achievement,
+                                    style: const TextStyle(
+                                      fontSize: 14,
+                                      height: 1.4,
+                                      color: Color(0xFF053158),
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
                                 ),
                               ],
                             ),
                           ),
-                          
-                          const SizedBox(height: 25),
-                          
-                          // Info items with modern design
-                          const Text(
-                            "Informasi Kegiatan",
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                              color: Color(0xFF053158),
+                        ).toList(),
+                        
+                        const SizedBox(height: 30),
+                        
+                        // Join button with gradient
+                        Center(
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              padding: EdgeInsets.zero,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(30),
+                              ),
+                              elevation: 5,
                             ),
-                          ),
-                          const SizedBox(height: 15),
-                          
-                          _buildModernInfoItem(
-                            icon: Icons.person,
-                            iconColor: const Color(0xFF5B67CA),
-                            title: "Pembina",
-                            value: extracurricular['coach'],
-                          ),
-                          _buildModernInfoItem(
-                            icon: Icons.access_time,
-                            iconColor: const Color(0xFFFF8C42),
-                            title: "Jadwal",
-                            value: extracurricular['schedule'],
-                          ),
-                          _buildModernInfoItem(
-                            icon: Icons.location_on,
-                            iconColor: const Color(0xFFE63E6D),
-                            title: "Lokasi",
-                            value: extracurricular['location'],
-                          ),
-                          
-                          const SizedBox(height: 25),
-                          
-                          // Achievements with badges
-                          const Text(
-                            "Prestasi",
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                              color: Color(0xFF053158),
-                            ),
-                          ),
-                          const SizedBox(height: 15),
-                          
-                          // Modern achievement list
-                          ...extracurricular['achievements'].map<Widget>((achievement) => 
-                            Container(
-                              margin: const EdgeInsets.only(bottom: 12),
-                              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+                            onPressed: () {
+                              // Tutup dialog
+                              Navigator.of(context).pop();
+                              // Tampilkan pesan konfirmasi pendaftaran
+                              _showConfirmationDialog(context, extracurricular);
+                            },
+                            child: Ink(
                               decoration: BoxDecoration(
-                                gradient: LinearGradient(
+                                gradient: const LinearGradient(
                                   colors: [
-                                    const Color(0xFFF5E5C4),
-                                    const Color(0xFFF5E5C4).withOpacity(0.7),
+                                    Color(0xFF053158),
+                                    Color(0xFF1A6BBE),
                                   ],
-                                  begin: Alignment.topLeft,
-                                  end: Alignment.bottomRight,
+                                  begin: Alignment.centerLeft,
+                                  end: Alignment.centerRight,
                                 ),
-                                borderRadius: BorderRadius.circular(12),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: const Color(0xFFF5E5C4).withOpacity(0.5),
-                                    blurRadius: 5,
-                                    offset: const Offset(0, 3),
-                                  ),
-                                ],
+                                borderRadius: BorderRadius.circular(30),
                               ),
-                              child: Row(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Container(
-                                    padding: const EdgeInsets.all(8),
-                                    decoration: const BoxDecoration(
-                                      color: Color(0xFFBE5B50),
-                                      shape: BoxShape.circle,
-                                    ),
-                                    child: const Icon(
-                                      Icons.emoji_events,
+                              child: Container(
+                                padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 12),
+                                child: const Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Icon(
+                                      Icons.how_to_reg,
                                       color: Colors.white,
-                                      size: 16,
+                                      size: 20,
                                     ),
-                                  ),
-                                  const SizedBox(width: 12),
-                                  Expanded(
-                                    child: Text(
-                                      achievement,
-                                      style: const TextStyle(
-                                        fontSize: 14,
-                                        height: 1.4,
-                                        color: Color(0xFF053158),
-                                        fontWeight: FontWeight.w500,
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ).toList(),
-                          
-                          const SizedBox(height: 30),
-                          
-                          // Join button with gradient
-                          Center(
-                            child: ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                padding: EdgeInsets.zero,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(30),
-                                ),
-                                elevation: 5,
-                              ),
-                              onPressed: () {
-                                // Tutup dialog
-                                Navigator.of(context).pop();
-                                // Tampilkan pesan konfirmasi pendaftaran
-                                _showConfirmationDialog(context, extracurricular);
-                              },
-                              child: Ink(
-                                decoration: BoxDecoration(
-                                  gradient: LinearGradient(
-                                    colors: [
-                                      const Color(0xFF053158),
-                                      const Color(0xFF1A6BBE),
-                                    ],
-                                    begin: Alignment.centerLeft,
-                                    end: Alignment.centerRight,
-                                  ),
-                                  borderRadius: BorderRadius.circular(30),
-                                ),
-                                child: Container(
-                                  padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 12),
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      const Icon(
-                                        Icons.how_to_reg,
+                                    SizedBox(width: 8),
+                                    Text(
+                                      "Gabung Sekarang",
+                                      style: TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.bold,
                                         color: Colors.white,
-                                        size: 20,
                                       ),
-                                      const SizedBox(width: 8),
-                                      const Text(
-                                        "Gabung Sekarang",
-                                        style: TextStyle(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.white,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
+                                    ),
+                                  ],
                                 ),
                               ),
                             ),
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   ),
                 ),
@@ -444,10 +451,11 @@ class ExtracurricularController extends GetxController {
     );
   }
   
-  // Method baru untuk menampilkan dialog konfirmasi pendaftaran
+  // Method untuk konfirmasi pendaftaran
   void _showConfirmationDialog(BuildContext context, Map<String, dynamic> extracurricular) {
     showDialog(
       context: context,
+      barrierDismissible: true,
       builder: (BuildContext context) {
         return Dialog(
           backgroundColor: Colors.transparent,
@@ -482,19 +490,19 @@ class ExtracurricularController extends GetxController {
                   ),
                 ),
                 const SizedBox(height: 20),
-                Text(
+                const Text(
                   "Pendaftaran Berhasil!",
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
-                    color: const Color(0xFF053158),
+                    color: Color(0xFF053158),
                   ),
                 ),
                 const SizedBox(height: 15),
                 Text(
                   "Kamu telah berhasil mendaftar untuk ekstrakulikuler ${extracurricular['name']}. Silakan hubungi ${extracurricular['coach']} untuk informasi lebih lanjut.",
                   textAlign: TextAlign.center,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 14,
                     height: 1.5,
                     color: Colors.black87,
@@ -540,15 +548,15 @@ class ExtracurricularController extends GetxController {
     );
   }
   
-  // Helper method untuk membuat item informasi dengan desain modern
-  Widget _buildModernInfoItem({
+  // Helper method untuk item informasi - sekarang return Widget bukan Container
+  Widget _buildInfoItem({
     required IconData icon,
     required Color iconColor,
     required String title,
     required String value,
   }) {
     return Container(
-      margin: const EdgeInsets.only(bottom: 15),
+      width: double.infinity,
       padding: const EdgeInsets.all(15),
       decoration: BoxDecoration(
         color: Colors.white,

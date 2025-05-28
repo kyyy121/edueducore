@@ -26,24 +26,24 @@ class CalendarView extends GetView<CalendarController> {
 
   PreferredSizeWidget _buildAppBar() {
     return AppBar(
-      backgroundColor: const Color(0xFFBE5B50),
+      backgroundColor: const Color(0xFFF5E5C4),
       elevation: 0,
       leading: IconButton(
-        icon: const Icon(Icons.arrow_back_ios, color: Colors.white),
+        icon: const Icon(Icons.arrow_back_ios, color: Colors.black, size: 20),
         onPressed: () => Get.back(),
       ),
       title: const Text(
         "Kalender SpenMa",
         style: TextStyle(
-          color: Colors.white,
+          color: Colors.black,
           fontWeight: FontWeight.bold,
-          fontSize: 18,
+          fontSize: 16,
         ),
       ),
       centerTitle: true,
       actions: [
         IconButton(
-          icon: const Icon(Icons.search, color: Colors.white),
+          icon: const Icon(Icons.search, color: Colors.black, size: 20),
           onPressed: () => controller.searchEvents(),
         ),
       ],
@@ -52,12 +52,12 @@ class CalendarView extends GetView<CalendarController> {
 
   Widget _buildHeader() {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       decoration: const BoxDecoration(
-        color: Color(0xFFBE5B50),
+        color: Color(0xFFF5E5C4),
         borderRadius: BorderRadius.only(
-          bottomLeft: Radius.circular(28),
-          bottomRight: Radius.circular(28),
+          bottomLeft: Radius.circular(0),
+          bottomRight: Radius.circular(0),
         ),
       ),
       child: Row(
@@ -69,41 +69,41 @@ class CalendarView extends GetView<CalendarController> {
               const Text(
                 "Aktivitas Sekolah",
                 style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 22,
+                  color: Colors.black,
+                  fontSize: 18,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              const SizedBox(height: 4),
+              const SizedBox(height: 2),
               Obx(() => Text(
                     "${controller.selectedMonth.value} ${controller.selectedYear.value}",
                     style: const TextStyle(
-                      color: Colors.white70,
-                      fontSize: 16,
+                      color: Colors.black,
+                      fontSize: 14,
                     ),
                   )),
             ],
           ),
           Container(
             decoration: BoxDecoration(
-              color: Colors.white12,
-              borderRadius: BorderRadius.circular(16),
+              color: Colors.black12,
+              borderRadius: BorderRadius.circular(12),
             ),
-            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
             child: Row(
               children: [
                 const Icon(
                   Icons.event_note,
-                  color: Colors.white,
-                  size: 20,
+                  color: Colors.black,
+                  size: 16,
                 ),
-                const SizedBox(width: 6),
+                const SizedBox(width: 4),
                 Obx(() => Text(
                       "${controller.totalEvents.value} Acara",
                       style: const TextStyle(
-                        color: Colors.white,
+                        color: Colors.black,
                         fontWeight: FontWeight.w600,
-                        fontSize: 14,
+                        fontSize: 12,
                       ),
                     )),
               ],
@@ -116,14 +116,14 @@ class CalendarView extends GetView<CalendarController> {
 
   Widget _buildCalendar() {
     return Card(
-      margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-      elevation: 4,
+      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+      elevation: 2,
       shadowColor: Colors.black26,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(16),
       ),
       child: Padding(
-        padding: const EdgeInsets.all(10.0),
+        padding: const EdgeInsets.all(8.0),
         child: Obx(() => TableCalendar(
               focusedDay: controller.focusedDay.value,
               firstDay: DateTime(2023, 1, 1),
@@ -145,7 +145,8 @@ class CalendarView extends GetView<CalendarController> {
               },
               calendarStyle: CalendarStyle(
                 outsideDaysVisible: true,
-                markersMaxCount: 3,
+                markersMaxCount: 2,
+                markerSize: 5,
                 markerDecoration: const BoxDecoration(
                   color: Color(0xFF053158),
                   shape: BoxShape.circle,
@@ -158,24 +159,32 @@ class CalendarView extends GetView<CalendarController> {
                   color: const Color(0xFFBE5B50).withOpacity(0.5),
                   shape: BoxShape.circle,
                 ),
-                weekendTextStyle: const TextStyle(color: Color(0xFFBE5B50)),
+                cellMargin: const EdgeInsets.all(4),
+                cellPadding: const EdgeInsets.all(2),
+                defaultTextStyle: const TextStyle(fontSize: 12),
+                weekendTextStyle: const TextStyle(fontSize: 12, color: Color(0xFFBE5B50)),
+                outsideTextStyle: const TextStyle(fontSize: 12, color: Colors.grey),
+                selectedTextStyle: const TextStyle(fontSize: 12, color: Colors.white),
+                todayTextStyle: const TextStyle(fontSize: 12, color: Colors.white),
               ),
               headerStyle: const HeaderStyle(
-                formatButtonVisible: true,
+                formatButtonVisible: false,
                 titleCentered: true,
-                formatButtonShowsNext: false,
-                formatButtonDecoration: BoxDecoration(
-                  color: Color(0xFF053158),
-                  borderRadius: BorderRadius.all(Radius.circular(12.0)),
-                ),
-                formatButtonTextStyle: TextStyle(color: Colors.white),
                 titleTextStyle: TextStyle(
-                  fontSize: 18.0,
+                  fontSize: 14.0,
                   fontWeight: FontWeight.bold,
                 ),
-                leftChevronIcon: Icon(Icons.chevron_left, color: Color(0xFF053158)),
-                rightChevronIcon: Icon(Icons.chevron_right, color: Color(0xFF053158)),
+                leftChevronIcon: Icon(Icons.chevron_left, color: Color(0xFF053158), size: 18),
+                rightChevronIcon: Icon(Icons.chevron_right, color: Color(0xFF053158), size: 18),
+                headerPadding: EdgeInsets.symmetric(vertical: 8),
+                headerMargin: EdgeInsets.only(bottom: 8),
               ),
+              daysOfWeekStyle: const DaysOfWeekStyle(
+                weekdayStyle: TextStyle(fontSize: 10, fontWeight: FontWeight.bold),
+                weekendStyle: TextStyle(fontSize: 10, fontWeight: FontWeight.bold, color: Color(0xFFBE5B50)),
+              ),
+              rowHeight: 36,
+              daysOfWeekHeight: 20,
             )),
       ),
     );
@@ -184,7 +193,7 @@ class CalendarView extends GetView<CalendarController> {
   Widget _buildEventsList() {
     return Expanded(
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
+        padding: const EdgeInsets.symmetric(horizontal: 16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -194,7 +203,7 @@ class CalendarView extends GetView<CalendarController> {
                 const Text(
                   "Kegiatan Terjadwal",
                   style: TextStyle(
-                    fontSize: 16,
+                    fontSize: 14,
                     fontWeight: FontWeight.bold,
                     color: Color(0xFF053158),
                   ),
@@ -206,12 +215,13 @@ class CalendarView extends GetView<CalendarController> {
                     style: TextStyle(
                       color: Color(0xFFBE5B50),
                       fontWeight: FontWeight.w600,
+                      fontSize: 12,
                     ),
                   ),
                 ),
               ],
             ),
-            const SizedBox(height: 10),
+            const SizedBox(height: 8),
             Expanded(
               child: Obx(() {
                 if (controller.selectedEvents.isEmpty) {
@@ -239,27 +249,27 @@ class CalendarView extends GetView<CalendarController> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Image.asset(
-            'assets/logo/icons/empty_calendar.png', // Add this image to your assets
-            width: 120,
-            height: 120,
+            'assets/logo/icons/empty_calendar.png',
+            width: 80,
+            height: 80,
             color: Colors.grey.withOpacity(0.6),
           ),
-          const SizedBox(height: 16),
+          const SizedBox(height: 12),
           Obx(() => Text(
                 "Tidak ada kegiatan pada ${DateFormat('d MMMM yyyy', 'id_ID').format(controller.selectedDay.value)}",
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  fontSize: 16,
+                  fontSize: 12,
                   color: Colors.grey.shade600,
                   fontWeight: FontWeight.w500,
                 ),
               )),
-          const SizedBox(height: 8),
+          const SizedBox(height: 6),
           const Text(
             "Pilih tanggal lain untuk melihat kegiatan",
             textAlign: TextAlign.center,
             style: TextStyle(
-              fontSize: 14,
+              fontSize: 10,
               color: Colors.grey,
             ),
           ),
@@ -273,33 +283,33 @@ class CalendarView extends GetView<CalendarController> {
     IconData categoryIcon = _getCategoryIcon(event['category']);
     
     return Card(
-      margin: const EdgeInsets.only(bottom: 16),
-      elevation: 2,
+      margin: const EdgeInsets.only(bottom: 12),
+      elevation: 1,
       shadowColor: Colors.black12,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(12),
       ),
       child: InkWell(
         onTap: () => controller.viewEventDetails(event),
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(12),
         child: Padding(
-          padding: const EdgeInsets.all(16),
+          padding: const EdgeInsets.all(12),
           child: Row(
             children: [
               Container(
-                width: 50,
-                height: 50,
+                width: 40,
+                height: 40,
                 decoration: BoxDecoration(
                   color: categoryColor.withOpacity(0.2),
-                  borderRadius: BorderRadius.circular(12),
+                  borderRadius: BorderRadius.circular(10),
                 ),
                 child: Icon(
                   categoryIcon,
                   color: categoryColor,
-                  size: 26,
+                  size: 20,
                 ),
               ),
-              const SizedBox(width: 16),
+              const SizedBox(width: 12),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -308,17 +318,17 @@ class CalendarView extends GetView<CalendarController> {
                       event['title'],
                       style: const TextStyle(
                         fontWeight: FontWeight.bold,
-                        fontSize: 16,
+                        fontSize: 14,
                       ),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),
-                    const SizedBox(height: 6),
+                    const SizedBox(height: 4),
                     Row(
                       children: [
                         const Icon(
                           Icons.schedule,
-                          size: 14,
+                          size: 12,
                           color: Colors.grey,
                         ),
                         const SizedBox(width: 4),
@@ -326,17 +336,17 @@ class CalendarView extends GetView<CalendarController> {
                           "${event['startTime']} - ${event['endTime']}",
                           style: const TextStyle(
                             color: Colors.grey,
-                            fontSize: 13,
+                            fontSize: 11,
                           ),
                         ),
                       ],
                     ),
-                    const SizedBox(height: 4),
+                    const SizedBox(height: 2),
                     Row(
                       children: [
                         const Icon(
                           Icons.location_on_outlined,
-                          size: 14,
+                          size: 12,
                           color: Colors.grey,
                         ),
                         const SizedBox(width: 4),
@@ -344,7 +354,7 @@ class CalendarView extends GetView<CalendarController> {
                           event['location'],
                           style: const TextStyle(
                             color: Colors.grey,
-                            fontSize: 13,
+                            fontSize: 11,
                           ),
                         ),
                       ],
@@ -353,16 +363,16 @@ class CalendarView extends GetView<CalendarController> {
                 ),
               ),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                 decoration: BoxDecoration(
                   color: categoryColor.withOpacity(0.2),
-                  borderRadius: BorderRadius.circular(6),
+                  borderRadius: BorderRadius.circular(4),
                 ),
                 child: Text(
                   event['category'],
                   style: TextStyle(
                     color: categoryColor,
-                    fontSize: 11,
+                    fontSize: 10,
                     fontWeight: FontWeight.bold,
                   ),
                 ),

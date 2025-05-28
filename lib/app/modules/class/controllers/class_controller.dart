@@ -1,99 +1,99 @@
 import 'package:get/get.dart';
 
 class ClassController extends GetxController {
-  // Observable variables
-  final RxString className = 'Kelas 7 IPA-1'.obs;
-  final RxString waliKelas = 'Drs. Ahmad Fauzan, M.Pd'.obs;
-  
-  // Current tab index (0 for Mata Pelajaran, 1 for Tugas)
+  // Informasi kelas
+  final RxString className = 'Kelas 6-G-6'.obs;
+  final RxString waliKelas = 'Sevina Zuhri W. S.Pd'.obs;
+
+  // Tab saat ini: 0 = Mata Pelajaran, 1 = Tugas
   final RxInt currentTabIndex = 0.obs;
-  
-  // List of subjects with teachers
+
+  // Daftar mata pelajaran
   final RxList<Map<String, dynamic>> subjects = <Map<String, dynamic>>[
     {
       'name': 'Matematika',
       'teacher': 'Dra. Siti Rahayu, M.Mat',
       'icon': 'assets/logo/icons/matematika.png',
-      'color': 0xFFFFCDD2, // Light red
+      'color': 0xFFFFCDD2,
       'completion': 85,
       'next_session': 'Senin, 08:00 - 09:30',
-      'material': 'Persamaan Kuadrat'
+      'material': 'Persamaan Kuadrat',
     },
     {
       'name': 'Bahasa Indonesia',
       'teacher': 'Drs. Budi Santoso, M.Pd',
       'icon': 'assets/logo/icons/bindo.png',
-      'color': 0xFFBBDEFB, // Light blue
+      'color': 0xFFBBDEFB,
       'completion': 90,
       'next_session': 'Selasa, 10:00 - 11:30',
-      'material': 'Teks Narasi'
+      'material': 'Teks Narasi',
     },
     {
       'name': 'Bahasa Inggris',
       'teacher': 'Dra. Sri Mulyani, M.Hum',
       'icon': 'assets/logo/icons/bing.png',
-      'color': 0xFFE1BEE7, // Light purple
+      'color': 0xFFE1BEE7,
       'completion': 75,
       'next_session': 'Rabu, 08:00 - 09:30',
-      'material': 'Present Perfect Tense'
+      'material': 'Present Perfect Tense',
     },
     {
       'name': 'IPA',
       'teacher': 'Dr. Agus Widodo, M.Si',
       'icon': 'assets/logo/icons/ipa.png',
-      'color': 0xFFC8E6C9, // Light green
+      'color': 0xFFC8E6C9,
       'completion': 80,
       'next_session': 'Kamis, 12:30 - 14:00',
-      'material': 'Sistem Pencernaan'
+      'material': 'Sistem Pencernaan',
     },
     {
       'name': 'IPS',
       'teacher': 'Dra. Ratna Dewi, M.Pd',
       'icon': 'assets/logo/icons/ips.png',
-      'color': 0xFFFFF9C4, // Light yellow
+      'color': 0xFFFFF9C4,
       'completion': 70,
       'next_session': 'Jumat, 10:00 - 11:30',
-      'material': 'Sejarah Kerajaan Nusantara'
+      'material': 'Sejarah Kerajaan Nusantara',
     },
     {
       'name': 'Seni Budaya',
       'teacher': 'Eko Prabowo, S.Sn',
       'icon': 'assets/logo/icons/seni.png',
-      'color': 0xFFFFE0B2, // Light orange
+      'color': 0xFFFFE0B2,
       'completion': 95,
       'next_session': 'Selasa, 12:30 - 14:00',
-      'material': 'Seni Lukis Modern'
+      'material': 'Seni Lukis Modern',
     },
     {
       'name': 'PJOK',
       'teacher': 'Hendra Wijaya, S.Pd',
       'icon': 'assets/logo/icons/pjok.png',
-      'color': 0xFFB3E5FC, // Light blue
+      'color': 0xFFB3E5FC,
       'completion': 88,
       'next_session': 'Rabu, 14:00 - 15:30',
-      'material': 'Permainan Bola Basket'
+      'material': 'Permainan Bola Basket',
     },
     {
       'name': 'PPKn',
       'teacher': 'Drs. Sutrisno, M.Pd',
       'icon': 'assets/logo/icons/ppkn.png',
-      'color': 0xFFD1C4E9, // Light purple
+      'color': 0xFFD1C4E9,
       'completion': 82,
       'next_session': 'Kamis, 10:00 - 11:30',
-      'material': 'Pancasila dan UUD 1945'
+      'material': 'Pancasila dan UUD 1945',
     },
     {
       'name': 'Informatika',
       'teacher': 'Ir. Dian Permata, M.Kom',
       'icon': 'assets/logo/icons/informatika.png',
-      'color': 0xFFB2EBF2, // Light cyan
+      'color': 0xFFB2EBF2,
       'completion': 92,
       'next_session': 'Jumat, 08:00 - 09:30',
-      'material': 'Dasar Pemrograman'
+      'material': 'Dasar Pemrograman',
     },
   ].obs;
-  
-  // List of assignments
+
+  // Daftar tugas
   final RxList<Map<String, dynamic>> assignments = <Map<String, dynamic>>[
     {
       'title': 'Tugas Matematika - Persamaan Kuadrat',
@@ -102,25 +102,26 @@ class ClassController extends GetxController {
       'deadline': 'Senin, 25 Mei 2025, 23:59',
       'submitted': false,
       'description': 'Kerjakan soal persamaan kuadrat halaman 45-46 nomor 1-10.',
-      'color': 0xFFFFCDD2, // Light red
+      'color': 0xFFFFCDD2,
     },
     {
       'title': 'Analisis Teks Narasi - Cerpen',
-      'subject': 'Bahasa Indonesia',
+      'subject': 'B.  Indo',
       'teacher': 'Drs. Budi Santoso, M.Pd',
       'deadline': 'Rabu, 27 Mei 2025, 23:59',
       'submitted': true,
       'description': 'Buatlah analisis struktur dari cerpen yang telah dibagikan.',
-      'color': 0xFFBBDEFB, // Light blue
+      'color': 0xFFBBDEFB,
     },
     {
       'title': 'Present Perfect Tense - Exercise',
-      'subject': 'Bahasa Inggris',
+      'subject': 'B. Ing',
       'teacher': 'Dra. Sri Mulyani, M.Hum',
       'deadline': 'Kamis, 28 Mei 2025, 23:59',
       'submitted': false,
-      'description': 'Complete the exercises on Present Perfect Tense from the workbook page 32-33.',
-      'color': 0xFFE1BEE7, // Light purple
+      'description':
+          'Complete the exercises on Present Perfect Tense from the workbook page 32-33.',
+      'color': 0xFFE1BEE7,
     },
     {
       'title': 'Laporan Pengamatan Sistem Pencernaan',
@@ -129,7 +130,7 @@ class ClassController extends GetxController {
       'deadline': 'Jumat, 29 Mei 2025, 23:59',
       'submitted': false,
       'description': 'Buatlah laporan hasil pengamatan praktikum sistem pencernaan.',
-      'color': 0xFFC8E6C9, // Light green
+      'color': 0xFFC8E6C9,
     },
     {
       'title': 'Presentasi Kerajaan Nusantara',
@@ -138,7 +139,7 @@ class ClassController extends GetxController {
       'deadline': 'Senin, 1 Juni 2025, 23:59',
       'submitted': false,
       'description': 'Siapkan presentasi kelompok tentang salah satu kerajaan di Nusantara.',
-      'color': 0xFFFFF9C4, // Light yellow
+      'color': 0xFFFFF9C4,
     },
     {
       'title': 'Praktik Pemrograman Dasar',
@@ -147,40 +148,41 @@ class ClassController extends GetxController {
       'deadline': 'Selasa, 2 Juni 2025, 23:59',
       'submitted': true,
       'description': 'Kerjakan latihan pemrograman dasar dengan menggunakan pseudocode.',
-      'color': 0xFFB2EBF2, // Light cyan
+      'color': 0xFFB2EBF2,
     },
   ].obs;
 
-  // Change tab
+  // Fungsi mengganti tab
   void changeTab(int index) {
     currentTabIndex.value = index;
   }
-  
-  // View subject detail
+
+  // Navigasi ke detail pelajaran
   void viewSubjectDetail(int index) {
     final subject = subjects[index];
     Get.toNamed('/subject-detail', arguments: subject);
   }
-  
-  // View assignment detail
+
+  // Navigasi ke detail tugas
   void viewAssignmentDetail(int index) {
     final assignment = assignments[index];
     Get.toNamed('/assignment-detail', arguments: assignment);
   }
-  
-  // Submit assignment
+
+  // Fungsi untuk mengumpulkan tugas
   void submitAssignment(int index) {
     final assignment = Map<String, dynamic>.from(assignments[index]);
     assignment['submitted'] = true;
     assignments[index] = assignment;
+
     Get.snackbar(
       'Berhasil',
       'Tugas berhasil dikumpulkan',
       snackPosition: SnackPosition.BOTTOM,
     );
   }
-  
-  // Return to home page
+
+  // Navigasi kembali ke halaman sebelumnya
   void backToHome() {
     Get.back();
   }
